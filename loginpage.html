@@ -1,0 +1,84 @@
+<html>
+<head>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+</head>
+
+<style>
+
+#login 
+{
+	margin-top:12%;
+}
+
+</style>
+<body>
+<div class='col-lg-4'>
+<h3 style='transform: rotate(270deg); transform-origin: left top 0; margin-top:75%;margin-left:70%;'> L o g i n </h3>
+</div>
+<div class='col-lg-4' id='login'>
+<h2 align='center'> The Cuboid </h2>
+<div class="form-group">
+  <label for="email">Email:</label>
+  <input type="text" class="form-control" id="email">
+</div>
+<div class="form-group">
+  <label for="pwd">Password:</label>
+  <input type="password" class="form-control" id="pwd">
+</div>
+
+<button type="submit" class="btn btn-default center-block" name='submit' id='submit' style='width: 50%;'>S u b m i t</button>
+<div id='error'></div> 
+
+<br>
+<br>
+<a href='registerpage.html' align='center'><h3>R e g i s t e r ?</h3></a>
+
+</div>
+
+<div class='col-lg-4'>
+</div>
+
+<script type="text/javascript">
+
+$('#submit').on('click',function()
+{
+	var email = $('#email').val();
+	var pwd = $('#pwd').val();
+	
+	$.ajax({
+		url: 'login.php',
+		type: "POST",
+		data: {"email": email, "pwd": pwd},
+		success: function (lol) {
+			if (lol!='fail')
+			{
+				window.open('index.php?name='+lol);
+			}
+			else
+			{
+				$('#error').empty();
+				var htmlstr='<br><p class="text-danger text-center">Dude seriously?</p>';
+				$(htmlstr).appendTo('#error');
+			}
+			}
+    }); 
+});
+   
+
+</script>
+
+</body>
+</html>
